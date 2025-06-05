@@ -23,18 +23,18 @@ from typing import List, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v17.services.services.campaign_label_service import (
+from google.ads.googleads.v20.services.services.campaign_label_service import (
     CampaignLabelServiceClient,
 )
-from google.ads.googleads.v17.services.services.campaign_service import (
+from google.ads.googleads.v20.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v17.services.services.label_service import LabelServiceClient
-from google.ads.googleads.v17.services.types.campaign_label_service import (
+from google.ads.googleads.v20.services.services.label_service import LabelServiceClient
+from google.ads.googleads.v20.services.types.campaign_label_service import (
     MutateCampaignLabelsResponse,
 )
-from google.ads.googleads.v17.resources.types.campaign_label import CampaignLabel
-from google.ads.googleads.v17.services.types.google_ads_service import GoogleAdsRow
+from google.ads.googleads.v20.resources.types.campaign_label import CampaignLabel
+from google.ads.googleads.v20.services.types.google_ads_service import GoogleAdsRow
 
 
 # [START add_campaign_labels]
