@@ -23,9 +23,9 @@ from typing import Any, Iterable
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.services.google_ads_service import GoogleAdsServiceClient
-from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsStreamResponse
-from google.ads.googleads.v19.types.google_ads_row import GoogleAdsRow
+from google.ads.googleads.v20.services.services.google_ads_service import GoogleAdsServiceClient
+from google.ads.googleads.v20.services.types.google_ads_service import SearchGoogleAdsStreamResponse
+from google.ads.googleads.v20.types.google_ads_row import GoogleAdsRow
 
 from cloud_logging_interceptor import CloudLoggingInterceptor
 
@@ -34,7 +34,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     # Instantiate the GoogleAdsService object with a custom interceptor.
     ga_service: GoogleAdsServiceClient = client.get_service(
         "GoogleAdsService",
-        interceptors=[CloudLoggingInterceptor(api_version="v19")],
+        interceptors=[CloudLoggingInterceptor(api_version="v20")],
     )
 
     query: str = """
@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(version="v20")
 
     try:
         main(googleads_client, args.customer_id)
