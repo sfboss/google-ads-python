@@ -133,6 +133,7 @@ class YouTubeExtractor:
             "yt-dlp",
             "--get-id",
             "--no-download",
+            "--cookies", "/workspaces/google-ads-python/cookies.txt",
             search_query
         ]
         
@@ -167,6 +168,7 @@ class YouTubeExtractor:
             "yt-dlp",
             "--dump-json",
             "--no-download",
+            "--cookies", "/workspaces/google-ads-python/cookies.txt",
             video_url
         ]
         
@@ -196,6 +198,7 @@ class YouTubeExtractor:
             "--write-auto-subs",
             "--sub-langs", "en",
             "--skip-download",
+            "--cookies", "/workspaces/google-ads-python/cookies.txt",
             "--output", str(temp_dir / "%(id)s.%(ext)s"),
             video_url
         ]
