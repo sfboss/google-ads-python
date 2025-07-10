@@ -1,0 +1,111 @@
+{
+  "timestamp": "2025-07-10T08:36:34.579678",
+  "source_analysis": {
+    "videos_analyzed": 3,
+    "total_views": 1673410736,
+    "content_themes": [
+      "Technology",
+      "Business"
+    ],
+    "content_categories": [
+      "Science & Technology",
+      "Music"
+    ]
+  },
+  "keyword_targeting": {
+    "primary_keywords": [
+      "salesforce",
+      "data",
+      "customer",
+      "crm",
+      "gon",
+      "einstein",
+      "give",
+      "business",
+      "http",
+      "platform",
+      "help",
+      "company",
+      "make",
+      "apps",
+      "see"
+    ],
+    "long_tail_phrases": [
+      "never gon",
+      "gon give",
+      "never gon give",
+      "give never",
+      "give never gon",
+      "gon give never",
+      "einstein platform",
+      "customer data",
+      "gon let",
+      "let never"
+    ],
+    "all_seed_keywords": [
+      "salesforce",
+      "data",
+      "customer",
+      "crm",
+      "gon",
+      "einstein",
+      "give",
+      "business",
+      "http",
+      "platform",
+      "help",
+      "company",
+      "make",
+      "apps",
+      "see",
+      "use",
+      "metadata",
+      "rick",
+      "get",
+      "say",
+      "never gon",
+      "gon give",
+      "never gon give",
+      "give never",
+      "give never gon",
+      "gon give never",
+      "einstein platform",
+      "customer data",
+      "gon let",
+      "let never"
+    ]
+  },
+  "google_ads_commands": {
+    "youtube_integration": "python adwords_service.py youtube-keywords -c YOUR_CUSTOMER_ID --pretty",
+    "traditional_research": "python adwords_service.py keyword-ideas -c YOUR_CUSTOMER_ID -k \"salesforce\" \"data\" \"customer\" \"crm\" \"gon\" \"einstein\" \"give\" \"business\" \"http\" \"platform\" --pretty"
+  },
+  "targeting_recommendations": {
+    "audience_interests": [
+      "Technology",
+      "Business"
+    ],
+    "content_categories": [
+      "Science & Technology",
+      "Music"
+    ],
+    "high_value_keywords": [
+      "salesforce",
+      "data",
+      "customer",
+      "crm",
+      "gon",
+      "einstein",
+      "give",
+      "business",
+      "http",
+      "platform"
+    ],
+    "demographic_insights": {
+      "total_potential_reach": 1673410736,
+      "content_mix": [
+        "Science & Technology",
+        "Music"
+      ]
+    }
+  }
+}
