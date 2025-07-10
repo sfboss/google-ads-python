@@ -1,0 +1,140 @@
+================================================================================
+YOUTUBE VIDEO CORPUS SUMMARY
+================================================================================
+
+Title: What is Salesforce? (2024 Update) | Salesforce Explained
+Channel: Salesforce
+Upload Date: 20240708
+Duration: 8:50
+View Count: 360883
+Like Count: 1403
+Comment Count: 43
+Video ID: TUXh42V_ng4
+URL: https://www.youtube.com/watch?v=TUXh42V_ng4
+
+----------------------------------------
+DESCRIPTION
+----------------------------------------
+What is Salesforce? Salesforce is the #1 AI CRM, helping companies connect with customers in a whole new way since 1999. Our product portfolio, Einstein 1, brings #1 CRM apps together with trusted AI and data on one integrated platform so companies can grow relationships, productivity, and their bottom line. 
+
+In our new era of artificial intelligence, Salesforce is democratizing AI for companies of every size and industry. Our pioneering formula of CRM + AI + Data + Trust helps everyone get their data together and embrace AI safely and securely across every team and employee so they can unlock the promise of AI to transform their business.
+
+Salesforce is proud to be the market leader, but we’re even more proud to lead in philanthropy, innovation and culture. Guided by core values of trust, customer success, innovation, equality and sustainability, Salesforce is more than a business — we’re a platform for change.
+
+Learn more: https://sforce.co/4coTSdJ
+
+Chapters
+00:00 What is Salesforce?
+00:28 What is CRM?
+00:52 What is Einstein 1?
+01:50 What is a Customer 360?
+02:07 Benefits of AI CRM
+02:27 How to build an AI Enterprise
+02:41 How to use Data Cloud to power your AI CRM
+04:02 How to use metadata to enhance your AI CRM
+04:24 How metadata helps AI
+04:42 How data and metadata improve AI CRM
+05:01 The dangers of public AI models 
+05:18 Salesforce's Trusted AI, "Einstein"
+05:46 What is the Einstein Trust Layer?
+06:20 How Einstein can support your business
+07:41 What is the Einstein 1 Platform?
+08:08 Benefits of Einstein 1 Platform
+
+#Salesforce #AI 
+
+Subscribe to Salesforce’s YouTube Channel: http://bit.ly/SalesforceSubscribe
+
+Learn more about Salesforce: https://www.salesforce.com 
+Facebook: https://www.facebook.com/salesforce 
+Twitter: https://www.twitter.com/salesforce 
+Instagram: https://www.instagram.com/salesforce 
+LinkedIn: https://www.linkedin.com/company/salesforce
+
+----------------------------------------
+TAGS
+----------------------------------------
+crm software, crm system, crm, ai in crm, customer software, crm platform, crm applications, best crm, benefits of crm AI: benefits of ai, ai cloud, ai for business, ai for companies, ai copilot, responsible ai, trusted ai, salesforce, salesforce explained, what is salesforce, salesforce ai, Ai chatbot, benefits of ai, conversational ai, generative ai, Ai crm, benefits of crm, best crm for small business, cloud crm, mobile crm, saas
+
+----------------------------------------
+CATEGORIES
+----------------------------------------
+Science & Technology
+
+----------------------------------------
+EXTRACTED FILES
+----------------------------------------
+- corpus_summary.txt
+- What is Salesforce？ (2024 Update) ｜ Salesforce Explained.info.json
+- comments.json
+- metadata.json
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.am-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.sq-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.aa-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.br-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.ak-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.bn-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.eu-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.az-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.ca-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.zh-Hans-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.af-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.ar-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.hy-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.be-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.bg-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.my-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.bs-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.ba-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.ceb-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.as-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.ab-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.bho-en.vtt
+- subtitles/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.ay-en.vtt
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.25.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.0.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.32.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.31.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.21.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.16.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.13.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.35.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.19.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.34.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.23.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.41.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.3.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.22.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.12.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.10.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.33.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.20.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.17.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.14.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.28.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.15.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.18.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.6.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.26.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.36.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.24.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.27.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.1.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.7.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.29.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.37.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.40.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.9.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.39.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.38.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.8.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.30.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.2.jpg
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.5.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.11.webp
+- thumbnails/What is Salesforce？ (2024 Update) ｜ Salesforce Explained.4.jpg
+
+================================================================================
+END OF CORPUS SUMMARY
+================================================================================

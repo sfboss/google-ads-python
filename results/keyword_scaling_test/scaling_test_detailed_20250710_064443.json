@@ -1,0 +1,245 @@
+{
+  "test_config": {
+    "customer_id": "3399365278",
+    "batch_sizes": [
+      1,
+      3,
+      5,
+      10,
+      20,
+      30,
+      50,
+      75,
+      100,
+      150,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800
+    ],
+    "iterations_per_batch": 3,
+    "total_keywords_available": 16530,
+    "delay_between_requests": 2
+  },
+  "results": [
+    {
+      "batch_size": 1,
+      "iteration": 0,
+      "timestamp": "2025-07-10T06:44:38.154937",
+      "selected_keywords": [
+        "salesforce flow pop up screen"
+      ],
+      "actual_keywords_sent": 1,
+      "keyword_ideas": {
+        "response_time": 1.5778911113739014,
+        "analysis": {
+          "success": true,
+          "total_results": 1,
+          "results_with_monthly_data": 1,
+          "avg_monthly_searches_available": 1,
+          "competition_data_available": 1,
+          "bid_data_available": 1,
+          "close_variants_available": 0,
+          "unique_suggestions": 1
+        },
+        "raw_response": {
+          "status": "success",
+          "timestamp": "2025-07-10T06:44:39.637636",
+          "request_params": {
+            "customer_id": "3399365278",
+            "keywords": [
+              "salesforce flow pop up screen"
+            ],
+            "page_url": null,
+            "location_ids": [
+              "1023191"
+            ],
+            "language_id": "1000",
+            "include_adult_keywords": false
+          },
+          "total_results": 1,
+          "keyword_ideas": [
+            {
+              "text": "salesforce flow pop up screen",
+              "avg_monthly_searches": 10,
+              "competition": "UNSPECIFIED",
+              "competition_index": 0,
+              "low_top_of_page_bid_micros": 0,
+              "high_top_of_page_bid_micros": 0,
+              "close_variants": [],
+              "monthly_search_volumes": [
+                {
+                  "year": 2024,
+                  "month": "JULY",
+                  "monthly_searches": 0
+                },
+                {
+                  "year": 2024,
+                  "month": "AUGUST",
+                  "monthly_searches": 0
+                },
+                {
+                  "year": 2024,
+                  "month": "SEPTEMBER",
+                  "monthly_searches": 0
+                },
+                {
+                  "year": 2024,
+                  "month": "OCTOBER",
+                  "monthly_searches": 0
+                },
+                {
+                  "year": 2024,
+                  "month": "NOVEMBER",
+                  "monthly_searches": 0
+                },
+                {
+                  "year": 2024,
+                  "month": "DECEMBER",
+                  "monthly_searches": 0
+                },
+                {
+                  "year": 2025,
+                  "month": "JANUARY",
+                  "monthly_searches": 0
+                },
+                {
+                  "year": 2025,
+                  "month": "FEBRUARY",
+                  "monthly_searches": 0
+                },
+                {
+                  "year": 2025,
+                  "month": "MARCH",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2025,
+                  "month": "APRIL",
+                  "monthly_searches": 0
+                },
+                {
+                  "year": 2025,
+                  "month": "MAY",
+                  "monthly_searches": 0
+                },
+                {
+                  "year": 2025,
+                  "month": "JUNE",
+                  "monthly_searches": 0
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "historical_metrics": {
+        "response_time": 1.3576862812042236,
+        "analysis": {
+          "success": true,
+          "total_results": 1,
+          "results_with_monthly_data": 1,
+          "avg_monthly_searches_available": 1,
+          "competition_data_available": 1,
+          "bid_data_available": 1,
+          "close_variants_available": 0,
+          "unique_suggestions": 0
+        },
+        "raw_response": {
+          "status": "success",
+          "timestamp": "2025-07-10T06:44:42.964449",
+          "request_params": {
+            "customer_id": "3399365278",
+            "keywords": [
+              "salesforce flow pop up screen"
+            ],
+            "location_ids": [
+              "2840"
+            ],
+            "language_id": "1000",
+            "keyword_plan_network": "GOOGLE_SEARCH",
+            "include_adult_keywords": false
+          },
+          "total_results": 1,
+          "historical_metrics": [
+            {
+              "text": "salesforce flow pop up screen",
+              "close_variants": [],
+              "avg_monthly_searches": 10,
+              "competition": "UNSPECIFIED",
+              "competition_index": 0,
+              "low_top_of_page_bid_micros": 0,
+              "high_top_of_page_bid_micros": 0,
+              "monthly_search_volumes": [
+                {
+                  "year": 2024,
+                  "month": "JULY",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2024,
+                  "month": "AUGUST",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2024,
+                  "month": "SEPTEMBER",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2024,
+                  "month": "OCTOBER",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2024,
+                  "month": "NOVEMBER",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2024,
+                  "month": "DECEMBER",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2025,
+                  "month": "JANUARY",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2025,
+                  "month": "FEBRUARY",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2025,
+                  "month": "MARCH",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2025,
+                  "month": "APRIL",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2025,
+                  "month": "MAY",
+                  "monthly_searches": 10
+                },
+                {
+                  "year": 2025,
+                  "month": "JUNE",
+                  "monthly_searches": 0
+                }
+              ]
+            }
+          ],
+          "aggregate_metrics": null
+        }
+      }
+    }
+  ]
+}

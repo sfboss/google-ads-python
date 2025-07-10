@@ -1,0 +1,548 @@
+name: Reddit Data Analytics Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      analysis_type:
+        description: 'Type of analysis to run'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - sentiment
+          - engagement
+          - keywords
+          - temporal
+          - custom
+      custom_script:
+        description: 'Custom analysis script name (if analysis_type is custom)'
+        required: false
+        type: string
+      output_format:
+        description: 'Output format for results'
+        required: false
+        default: 'json'
+        type: choice
+        options:
+          - json
+          - csv
+          - html
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  push:
+    paths:
+      - 'data/posts/**'
+
+jobs:
+  analyze-reddit-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas numpy matplotlib seaborn plotly dash textblob wordcloud scikit-learn
+        pip install vaderSentiment praw python-dotenv requests beautifulsoup4
+        
+    - name: Create analytics structure
+      run: |
+        mkdir -p analytics/{scripts,results,dashboards,temp}
+        mkdir -p analytics/results/{sentiment,engagement,keywords,temporal,custom}
+        
+    - name: Generate analytics script
+      run: |
+        cat > analytics/scripts/reddit_analyzer.py << 'EOF'
+        import json
+        import pandas as pd
+        import numpy as np
+        from pathlib import Path
+        import matplotlib.pyplot as plt
+        import seaborn as sns
+        import plotly.graph_objects as go
+        import plotly.express as px
+        from textblob import TextBlob
+        from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+        from wordcloud import WordCloud
+        from collections import Counter
+        import re
+        from datetime import datetime, timedelta
+        import os
+        import sys
+        
+        class RedditAnalyzer:
+            def __init__(self, data_path="data/posts", output_path="analytics/results"):
+                self.data_path = Path(data_path)
+                self.output_path = Path(output_path)
+                self.df = None
+                self.analyzer = SentimentIntensityAnalyzer()
+                
+            def load_data(self):
+                """Load all JSON files from data directory"""
+                json_files = list(self.data_path.glob("**/*.json"))
+                all_posts = []
+                
+                for file_path in json_files:
+                    try:
+                        with open(file_path, 'r', encoding='utf-8') as f:
+                            data = json.load(f)
+                            if isinstance(data, list):
+                                all_posts.extend(data)
+                            else:
+                                all_posts.append(data)
+                    except Exception as e:
+                        print(f"Error loading {file_path}: {e}")
+                        
+                self.df = pd.DataFrame(all_posts)
+                print(f"Loaded {len(self.df)} posts from {len(json_files)} files")
+                return self.df
+                
+            def preprocess_data(self):
+                """Clean and preprocess the data"""
+                if self.df is None:
+                    self.load_data()
+                    
+                # Handle different possible column names
+                text_columns = ['selftext', 'body', 'text', 'content']
+                title_columns = ['title', 'subject', 'header']
+                
+                # Find the actual text column
+                text_col = None
+                for col in text_columns:
+                    if col in self.df.columns:
+                        text_col = col
+                        break
+                        
+                title_col = None
+                for col in title_columns:
+                    if col in self.df.columns:
+                        title_col = col
+                        break
+                
+                # Create standardized columns
+                self.df['text_content'] = self.df[text_col] if text_col else ""
+                self.df['post_title'] = self.df[title_col] if title_col else ""
+                
+                # Combine title and text for full content analysis
+                self.df['full_content'] = (
+                    self.df['post_title'].astype(str) + " " + 
+                    self.df['text_content'].astype(str)
+                ).str.strip()
+                
+                # Convert timestamps if present
+                if 'created_utc' in self.df.columns:
+                    self.df['created_date'] = pd.to_datetime(self.df['created_utc'], unit='s')
+                elif 'created' in self.df.columns:
+                    self.df['created_date'] = pd.to_datetime(self.df['created'])
+                    
+                # Clean text
+                self.df['cleaned_text'] = self.df['full_content'].apply(self.clean_text)
+                
+                return self.df
+                
+            def clean_text(self, text):
+                """Clean text for analysis"""
+                if pd.isna(text):
+                    return ""
+                text = str(text).lower()
+                text = re.sub(r'http\S+', '', text)  # Remove URLs
+                text = re.sub(r'[^a-zA-Z\s]', '', text)  # Keep only letters and spaces
+                text = re.sub(r'\s+', ' ', text)  # Remove extra whitespace
+                return text.strip()
+                
+            def sentiment_analysis(self):
+                """Perform sentiment analysis"""
+                results = []
+                
+                for idx, row in self.df.iterrows():
+                    text = row['cleaned_text']
+                    if not text:
+                        continue
+                        
+                    # VADER sentiment
+                    vader_scores = self.analyzer.polarity_scores(text)
+                    
+                    # TextBlob sentiment
+                    blob = TextBlob(text)
+                    
+                    results.append({
+                        'post_id': idx,
+                        'vader_compound': vader_scores['compound'],
+                        'vader_pos': vader_scores['pos'],
+                        'vader_neu': vader_scores['neu'],
+                        'vader_neg': vader_scores['neg'],
+                        'textblob_polarity': blob.sentiment.polarity,
+                        'textblob_subjectivity': blob.sentiment.subjectivity,
+                        'sentiment_category': self.categorize_sentiment(vader_scores['compound'])
+                    })
+                    
+                sentiment_df = pd.DataFrame(results)
+                
+                # Generate visualizations
+                self.create_sentiment_visualizations(sentiment_df)
+                
+                # Save results
+                output_file = self.output_path / 'sentiment' / f'sentiment_analysis_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
+                sentiment_df.to_json(output_file, orient='records', indent=2)
+                
+                return sentiment_df
+                
+            def categorize_sentiment(self, compound_score):
+                """Categorize sentiment based on compound score"""
+                if compound_score >= 0.05:
+                    return 'positive'
+                elif compound_score <= -0.05:
+                    return 'negative'
+                else:
+                    return 'neutral'
+                    
+            def engagement_analysis(self):
+                """Analyze engagement metrics"""
+                engagement_cols = ['score', 'upvotes', 'ups', 'num_comments', 'comments']
+                
+                results = {}
+                
+                for col in engagement_cols:
+                    if col in self.df.columns:
+                        results[f'{col}_mean'] = self.df[col].mean()
+                        results[f'{col}_median'] = self.df[col].median()
+                        results[f'{col}_std'] = self.df[col].std()
+                        results[f'{col}_max'] = self.df[col].max()
+                        results[f'{col}_min'] = self.df[col].min()
+                        
+                # Text length analysis
+                self.df['text_length'] = self.df['cleaned_text'].str.len()
+                results['avg_text_length'] = self.df['text_length'].mean()
+                results['median_text_length'] = self.df['text_length'].median()
+                
+                # Correlation analysis
+                numeric_cols = self.df.select_dtypes(include=[np.number]).columns
+                correlation_matrix = self.df[numeric_cols].corr()
+                
+                # Save results
+                output_file = self.output_path / 'engagement' / f'engagement_analysis_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
+                with open(output_file, 'w') as f:
+                    json.dump(results, f, indent=2, default=str)
+                    
+                return results
+                
+            def keyword_analysis(self):
+                """Extract and analyze keywords"""
+                # Combine all text
+                all_text = ' '.join(self.df['cleaned_text'].dropna())
+                
+                # Word frequency
+                words = all_text.split()
+                word_freq = Counter(words)
+                
+                # Remove common stop words
+                stop_words = set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'must', 'can', 'this', 'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they', 'my', 'your', 'his', 'her', 'its', 'our', 'their'])
+                
+                filtered_words = {word: count for word, count in word_freq.items() 
+                                if word not in stop_words and len(word) > 2}
+                
+                # Top keywords
+                top_keywords = dict(sorted(filtered_words.items(), key=lambda x: x[1], reverse=True)[:50])
+                
+                # Generate word cloud
+                if top_keywords:
+                    wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(top_keywords)
+                    
+                    plt.figure(figsize=(10, 5))
+                    plt.imshow(wordcloud, interpolation='bilinear')
+                    plt.axis('off')
+                    plt.title('Most Frequent Keywords')
+                    plt.tight_layout()
+                    plt.savefig(self.output_path / 'keywords' / f'wordcloud_{datetime.now().strftime("%Y%m%d_%H%M%S")}.png', 
+                              dpi=300, bbox_inches='tight')
+                    plt.close()
+                
+                # Save results
+                output_file = self.output_path / 'keywords' / f'keyword_analysis_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
+                with open(output_file, 'w') as f:
+                    json.dump({
+                        'top_keywords': top_keywords,
+                        'total_words': len(words),
+                        'unique_words': len(set(words)),
+                        'avg_word_length': np.mean([len(word) for word in words])
+                    }, f, indent=2)
+                    
+                return top_keywords
+                
+            def temporal_analysis(self):
+                """Analyze temporal patterns"""
+                if 'created_date' not in self.df.columns:
+                    print("No timestamp data available for temporal analysis")
+                    return None
+                    
+                # Posts per day
+                self.df['date'] = self.df['created_date'].dt.date
+                posts_per_day = self.df.groupby('date').size()
+                
+                # Posts per hour
+                self.df['hour'] = self.df['created_date'].dt.hour
+                posts_per_hour = self.df.groupby('hour').size()
+                
+                # Posts per day of week
+                self.df['day_of_week'] = self.df['created_date'].dt.day_name()
+                posts_per_dow = self.df.groupby('day_of_week').size()
+                
+                # Create visualizations
+                fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+                
+                # Time series plot
+                posts_per_day.plot(ax=axes[0,0], kind='line')
+                axes[0,0].set_title('Posts per Day')
+                axes[0,0].set_xlabel('Date')
+                axes[0,0].set_ylabel('Number of Posts')
+                
+                # Hour distribution
+                posts_per_hour.plot(ax=axes[0,1], kind='bar')
+                axes[0,1].set_title('Posts per Hour')
+                axes[0,1].set_xlabel('Hour of Day')
+                axes[0,1].set_ylabel('Number of Posts')
+                
+                # Day of week distribution
+                posts_per_dow.plot(ax=axes[1,0], kind='bar')
+                axes[1,0].set_title('Posts per Day of Week')
+                axes[1,0].set_xlabel('Day of Week')
+                axes[1,0].set_ylabel('Number of Posts')
+                
+                plt.tight_layout()
+                plt.savefig(self.output_path / 'temporal' / f'temporal_analysis_{datetime.now().strftime("%Y%m%d_%H%M%S")}.png', 
+                          dpi=300, bbox_inches='tight')
+                plt.close()
+                
+                # Save results
+                results = {
+                    'posts_per_day': posts_per_day.to_dict(),
+                    'posts_per_hour': posts_per_hour.to_dict(),
+                    'posts_per_dow': posts_per_dow.to_dict(),
+                    'date_range': {
+                        'start': str(self.df['created_date'].min()),
+                        'end': str(self.df['created_date'].max())
+                    }
+                }
+                
+                output_file = self.output_path / 'temporal' / f'temporal_analysis_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
+                with open(output_file, 'w') as f:
+                    json.dump(results, f, indent=2, default=str)
+                    
+                return results
+                
+            def create_sentiment_visualizations(self, sentiment_df):
+                """Create sentiment visualizations"""
+                fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+                
+                # Sentiment distribution
+                sentiment_df['sentiment_category'].value_counts().plot(ax=axes[0,0], kind='bar')
+                axes[0,0].set_title('Sentiment Distribution')
+                axes[0,0].set_xlabel('Sentiment Category')
+                axes[0,0].set_ylabel('Count')
+                
+                # VADER compound score distribution
+                axes[0,1].hist(sentiment_df['vader_compound'], bins=30, alpha=0.7)
+                axes[0,1].set_title('VADER Compound Score Distribution')
+                axes[0,1].set_xlabel('Compound Score')
+                axes[0,1].set_ylabel('Frequency')
+                
+                # TextBlob polarity vs subjectivity
+                axes[1,0].scatter(sentiment_df['textblob_polarity'], sentiment_df['textblob_subjectivity'], alpha=0.6)
+                axes[1,0].set_title('TextBlob: Polarity vs Subjectivity')
+                axes[1,0].set_xlabel('Polarity')
+                axes[1,0].set_ylabel('Subjectivity')
+                
+                # VADER detailed scores
+                vader_scores = sentiment_df[['vader_pos', 'vader_neu', 'vader_neg']].mean()
+                axes[1,1].bar(vader_scores.index, vader_scores.values)
+                axes[1,1].set_title('Average VADER Scores')
+                axes[1,1].set_xlabel('Sentiment Type')
+                axes[1,1].set_ylabel('Average Score')
+                
+                plt.tight_layout()
+                plt.savefig(self.output_path / 'sentiment' / f'sentiment_visualizations_{datetime.now().strftime("%Y%m%d_%H%M%S")}.png', 
+                          dpi=300, bbox_inches='tight')
+                plt.close()
+                
+            def run_analysis(self, analysis_type='all'):
+                """Run the specified analysis"""
+                print(f"Starting {analysis_type} analysis...")
+                
+                # Load and preprocess data
+                self.load_data()
+                self.preprocess_data()
+                
+                results = {}
+                
+                if analysis_type == 'all' or analysis_type == 'sentiment':
+                    print("Running sentiment analysis...")
+                    results['sentiment'] = self.sentiment_analysis()
+                    
+                if analysis_type == 'all' or analysis_type == 'engagement':
+                    print("Running engagement analysis...")
+                    results['engagement'] = self.engagement_analysis()
+                    
+                if analysis_type == 'all' or analysis_type == 'keywords':
+                    print("Running keyword analysis...")
+                    results['keywords'] = self.keyword_analysis()
+                    
+                if analysis_type == 'all' or analysis_type == 'temporal':
+                    print("Running temporal analysis...")
+                    results['temporal'] = self.temporal_analysis()
+                    
+                # Generate summary report
+                self.generate_summary_report(results)
+                
+                return results
+                
+            def generate_summary_report(self, results):
+                """Generate a summary report of all analyses"""
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                
+                report = {
+                    'analysis_timestamp': timestamp,
+                    'dataset_info': {
+                        'total_posts': len(self.df),
+                        'columns': list(self.df.columns),
+                        'date_range': {
+                            'start': str(self.df['created_date'].min()) if 'created_date' in self.df.columns else 'N/A',
+                            'end': str(self.df['created_date'].max()) if 'created_date' in self.df.columns else 'N/A'
+                        }
+                    },
+                    'analysis_results': {}
+                }
+                
+                # Add summary statistics for each analysis
+                for analysis_name, analysis_result in results.items():
+                    if analysis_result is not None:
+                        report['analysis_results'][analysis_name] = f"Analysis completed - check {analysis_name} folder for detailed results"
+                        
+                # Save summary report
+                output_file = self.output_path / f'summary_report_{timestamp}.json'
+                with open(output_file, 'w') as f:
+                    json.dump(report, f, indent=2, default=str)
+                    
+                print(f"Summary report saved to {output_file}")
+                
+        if __name__ == "__main__":
+            analysis_type = sys.argv[1] if len(sys.argv) > 1 else 'all'
+            
+            analyzer = RedditAnalyzer()
+            results = analyzer.run_analysis(analysis_type)
+            
+            print(f"Analysis complete! Results saved to analytics/results/")
+        EOF
+        
+    - name: Run Reddit Analysis
+      run: |
+        cd analytics/scripts
+        python reddit_analyzer.py ${{ github.event.inputs.analysis_type || 'all' }}
+        
+    - name: Generate Dashboard Data
+      run: |
+        cat > analytics/scripts/dashboard_generator.py << 'EOF'
+        import json
+        import pandas as pd
+        from pathlib import Path
+        import plotly.graph_objects as go
+        import plotly.express as px
+        from datetime import datetime
+        
+        def generate_dashboard():
+            results_path = Path('analytics/results')
+            dashboard_data = {
+                'timestamp': datetime.now().isoformat(),
+                'charts': [],
+                'metrics': {},
+                'data_sources': []
+            }
+            
+            # Collect all analysis results
+            for analysis_dir in results_path.iterdir():
+                if analysis_dir.is_dir():
+                    latest_file = max(analysis_dir.glob('*.json'), key=lambda x: x.stat().st_mtime, default=None)
+                    if latest_file:
+                        with open(latest_file, 'r') as f:
+                            data = json.load(f)
+                            dashboard_data['data_sources'].append({
+                                'type': analysis_dir.name,
+                                'file': str(latest_file),
+                                'timestamp': datetime.fromtimestamp(latest_file.stat().st_mtime).isoformat()
+                            })
+            
+            # Save dashboard configuration
+            with open('analytics/dashboards/dashboard_config.json', 'w') as f:
+                json.dump(dashboard_data, f, indent=2)
+                
+            print("Dashboard configuration generated!")
+            
+        if __name__ == "__main__":
+            generate_dashboard()
+        EOF
+        
+        python analytics/scripts/dashboard_generator.py
+        
+    - name: Run Custom Analysis (if specified)
+      if: github.event.inputs.analysis_type == 'custom' && github.event.inputs.custom_script != ''
+      run: |
+        if [ -f "analytics/scripts/${{ github.event.inputs.custom_script }}" ]; then
+          python analytics/scripts/${{ github.event.inputs.custom_script }}
+        else
+          echo "Custom script ${{ github.event.inputs.custom_script }} not found"
+          exit 1
+        fi
+        
+    - name: Commit Results
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add analytics/
+        git diff --staged --quiet || git commit -m "🤖 Auto-update analytics results - $(date)"
+        
+    - name: Push Changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+        
+    - name: Create Analysis Summary
+      run: |
+        echo "## Reddit Data Analysis Summary" > analytics/README.md
+        echo "Generated on: $(date)" >> analytics/README.md
+        echo "" >> analytics/README.md
+        echo "### Available Analyses:" >> analytics/README.md
+        echo "- **Sentiment Analysis**: Emotion and opinion analysis using VADER and TextBlob" >> analytics/README.md
+        echo "- **Engagement Analysis**: Metrics on upvotes, comments, and interaction patterns" >> analytics/README.md
+        echo "- **Keyword Analysis**: Most frequent terms and word cloud generation" >> analytics/README.md
+        echo "- **Temporal Analysis**: Time-based patterns and trends" >> analytics/README.md
+        echo "" >> analytics/README.md
+        echo "### File Structure:" >> analytics/README.md
+        echo "\`\`\`" >> analytics/README.md
+        tree analytics/ >> analytics/README.md || ls -la analytics/
+        echo "\`\`\`" >> analytics/README.md
+        
+    - name: Upload Analytics Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: reddit-analytics-results
+        path: analytics/
+        retention-days: 30

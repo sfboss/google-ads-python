@@ -1,0 +1,53 @@
+2025-07-09 22:03:47 | INFO | serp2text | Running SERP2Text for 'salesforce' → results/salesforce
+2025-07-09 22:03:47 | INFO | serp2text | Querying Google for 'salesforce' – expecting 20 results
+2025-07-09 22:04:06 | INFO | serp2text | Running SERP2Text for 'salesforce' → results/salesforce
+2025-07-09 22:04:07 | INFO | serp2text | Querying Google for 'salesforce' – expecting 20 results
+2025-07-09 22:04:09 | INFO | serp2text | Saved urls.txt with 20 entries
+2025-07-09 22:04:44 | INFO | serp2text | Running SERP2Text for 'salesforce' → results/salesforce
+2025-07-09 22:04:44 | INFO | serp2text | Querying Google for 'salesforce' – expecting 20 results
+2025-07-09 22:04:46 | INFO | serp2text | Saved urls.txt with 20 entries
+2025-07-09 22:04:46 | INFO | pyppeteer.chromium_downloader | Starting Chromium download.
+2025-07-09 22:04:49 | INFO | pyppeteer.chromium_downloader | Beginning extraction
+2025-07-09 22:04:53 | INFO | pyppeteer.chromium_downloader | Chromium extracted to: /home/codespace/.local/share/pyppeteer/local-chromium/1181205
+2025-07-09 22:05:03 | INFO | pyppeteer.launcher | Browser listening on: ws://127.0.0.1:59343/devtools/browser/92e7204f-deea-4c00-b3af-b5cb794f870a
+2025-07-09 22:05:03 | INFO | pyppeteer.launcher | Browser listening on: ws://127.0.0.1:42603/devtools/browser/b385e4fd-a16f-4b9a-befa-cc22c9e3e498
+2025-07-09 22:05:04 | INFO | pyppeteer.launcher | Browser listening on: ws://127.0.0.1:50031/devtools/browser/dd7b3d57-bb77-44c1-b582-67ebd96b4496
+2025-07-09 22:05:04 | INFO | pyppeteer.launcher | Browser listening on: ws://127.0.0.1:41775/devtools/browser/bc7a4118-6af6-4e37-a150-e089c0514026
+2025-07-09 22:05:04 | INFO | pyppeteer.launcher | Browser listening on: ws://127.0.0.1:38781/devtools/browser/49a6d620-1064-45fa-aba9-9c96a7978918
+2025-07-09 22:05:13 | INFO | pyppeteer.launcher | terminate chrome process...
+2025-07-09 22:05:13 | INFO | pyppeteer.launcher | terminate chrome process...
+2025-07-09 22:05:13 | WARNING | serp2text | https://x.com/salesforce/status/1942947091170381963?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet failed – Connection is closed
+2025-07-09 22:05:13 | WARNING | serp2text | https://x.com/salesforce/status/1943037576979349633?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet failed – Protocol Error (Runtime.callFunctionOn): Session closed. Most likely the page has been closed.
+2025-07-09 22:05:13 | WARNING | serp2text | https://x.com/salesforce/status/1942916747520024966?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | http://www.salesforce.com/ failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://en.wikipedia.org/wiki/Salesforce failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://www.instagram.com/salesforce/?hl=en failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://www.facebook.com/salesforce/ failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://www.cnbc.com/quotes/CRM failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://finance.yahoo.com/quote/CRM/ failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://www.reddit.com/r/salesforce/ failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://www.youtube.com/salesforce failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://www.youtube.com/watch?v=TUXh42V_ng4&pp=0gcJCfwAo7VqN5tD failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://www.techtarget.com/searchcustomerexperience/definition/Salesforcecom failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://careers.mckesson.com/en/job/irving/salesforce-platform-director/733/83587109312 failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://www.lightningdesignsystem.com/2e1ef8501 failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | WARNING | serp2text | https://www.salesforceben.com/salesforce-winter-26-release-what-to-expect-and-how-to-prepare/ failed – cannot schedule new futures after shutdown
+2025-07-09 22:05:13 | INFO | pyppeteer.launcher | terminate chrome process...
+2025-07-09 22:05:14 | WARNING | serp2text | https://x.com/salesforce/status/1942992299023020426?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet failed – Protocol error Runtime.callFunctionOn: Target closed.
+2025-07-09 22:05:14 | INFO | pyppeteer.launcher | terminate chrome process...
+2025-07-09 22:05:14 | INFO | pyppeteer.launcher | terminate chrome process...
+2025-07-09 22:05:58 | INFO | serp2text | Running SERP2Text for 'salesforce' → results/salesforce
+2025-07-09 22:05:58 | INFO | serp2text | Querying Google for 'salesforce' – expecting 20 results
+2025-07-09 22:06:00 | INFO | serp2text | Saved urls.txt with 20 entries
+2025-07-09 22:06:01 | INFO | pyppeteer.launcher | Browser listening on: ws://127.0.0.1:40545/devtools/browser/e0f9aabc-3a60-4617-a3ba-773e108a809c
+2025-07-09 22:06:01 | INFO | pyppeteer.launcher | Browser listening on: ws://127.0.0.1:46401/devtools/browser/85f89cfd-8ed0-4252-8e37-2980284086b5
+2025-07-09 22:06:01 | INFO | pyppeteer.launcher | Browser listening on: ws://127.0.0.1:56393/devtools/browser/2a698891-0da5-426a-a044-bfbff6a5aa05
+2025-07-09 22:06:01 | INFO | pyppeteer.launcher | Browser listening on: ws://127.0.0.1:59783/devtools/browser/398135c1-a734-4eb3-808a-8855660a1c8c
+2025-07-09 22:06:28 | WARNING | serp2text | https://www.instagram.com/salesforce/?hl=en failed – Document is empty
+2025-07-09 22:07:05 | INFO | pyppeteer.launcher | terminate chrome process...
+2025-07-09 22:07:05 | INFO | serp2text | Fetched and saved 19 documents
+2025-07-09 22:07:05 | INFO | serp2text | Extracting keywords with YAKE
+2025-07-09 22:07:08 | INFO | serp2text | Saved keywords.json (40 items)
+2025-07-09 22:07:08 | INFO | pyppeteer.launcher | terminate chrome process...
+2025-07-09 22:07:08 | INFO | pyppeteer.launcher | terminate chrome process...
+2025-07-09 22:07:08 | INFO | pyppeteer.launcher | terminate chrome process...
