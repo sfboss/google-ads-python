@@ -3,6 +3,31 @@
 *.iml
 .python-version
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Google Ads API credentials
+google-ads.yaml
+client-secrets.json
+
+# Output files
+output/
+*.json
+*.csv
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
 # Distribution / packaging
 .Python
 build/
@@ -20,7 +45,11 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
 
 # Unit test / coverage reports
 htmlcov/
@@ -36,3 +65,4 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+archived/
